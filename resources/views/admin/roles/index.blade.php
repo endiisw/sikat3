@@ -123,7 +123,8 @@
                                                     </a>
                                                 </li>
                                                 <li class="dropdown-list-item">
-                                                    <a href="{{ route('admin.roles.edit', $role) }}" class="dropdown-link">
+                                                    <a href="{{ route('admin.roles.edit', Hashids::encode($role->id)) }}"
+                                                        class="dropdown-link">
                                                         <i class="h-5 text-slate-400" data-feather="edit"></i>
                                                         <span>Edit</span>
                                                     </a>

@@ -8,7 +8,7 @@
 
             <div class="sidebar-logo-text">
                 <h1 class="flex text-xl">
-                    <span class="font-semibold text-[#030f6b] dark:text-slate-200"> SiKat </span>
+                    <span class="font-semibold text-[#030f6b] dark:text-slate-200"> SIKAT </span>
                     <span class="font-semibold text-[#fbb717]">K3</span>
                 </h1>
 
@@ -53,33 +53,6 @@
                 </li>
             </ul>
         </li>
-        {{-- <li>
-            <a href="{{ route('admin.users.index') }}"
-                class="sidebar-menu @if (Route::is('admin.users.*')) active @endif">
-                <span class="sidebar-menu-icon">
-                    <i class="ti ti-user-circle text-2xl""></i>
-                </span>
-                <span class="sidebar-menu-text">User Login</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.roles.index') }}"
-                class="sidebar-menu @if (Route::is('admin.roles.*')) active @endif">
-                <span class="sidebar-menu-icon">
-                    <i class="ti ti-shield-lock text-2xl""></i>
-                </span>
-                <span class="sidebar-menu-text">Hak Akses User</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="#" class="sidebar-menu {{ request()->is('admin/permissions') ? 'active' : '' }}">
-                <span class="sidebar-menu-icon">
-                    <i class="ti ti-shield-check text-2xl""></i>
-                </span>
-                <span class="sidebar-menu-text">Izin Hak Akses</span>
-            </a>
-        </li> --}}
 
         <div class="sidebar-menu-header">Master Data</div>
 

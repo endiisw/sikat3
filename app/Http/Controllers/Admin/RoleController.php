@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Spatie\Permission\Models\Role;
+use Vinkla\Hashids\Facades\Hashids;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
@@ -15,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate();
+        $roles = Role::where('name', '!=', 'Developer')->paginate();
 
         return view('admin.roles.index', [
             'roles' => $roles,
@@ -53,13 +54,20 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Role $role)
+    public function edit($id)
     {
-        $permissions = Permission::all();
+        $ids = Hashids::decode($id);
+
+        $remappedPermission = [];
+        $permissions = Permission::all()->pluck('name');
+
+        foreach ($permissions as $permission) {
+            $remappedPermission[explode('-', $permission)[1]][] = $permission;
+        }
 
         return view('admin.roles.edit', [
-            'role' => $role,
-            'permissions' => $permissions,
+            'role' => Role::findorFail($ids[0]),
+            'permissions' => $remappedPermission,
         ]);
     }
 

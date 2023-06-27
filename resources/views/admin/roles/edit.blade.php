@@ -55,8 +55,10 @@
             <div class="rounded-primary bg-white p-6 shadow dark:bg-slate-800">
                 <h5 class="m-0 p-0 text-xl font-semibold text-slate-700 dark:text-slate-200">Permissions</h5>
                 <p class="mb-4 p-0 text-sm font-normal text-slate-400">Mengatur permission untuk setiap role</p>
-                <div class="grid max-w-6xl grid-cols-1 gap-4">
-                    @foreach ($permissions->groupBy(fn($permission) => Str::plural(Str::afterLast($permission->name, ' '))) as $model => $modelPermission)
+                <form action="#" method="POST">
+                    @csrf
+                    <div class="grid max-w-6xl grid-cols-1 gap-4">
+                        {{-- @foreach ($permissions->groupBy(fn($permission) => Str::plural(Str::afterLast($permission->name, ' '))) as $model => $modelPermission)
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">{{ Str::title($model) }}</h4>
@@ -75,15 +77,37 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-                <div class="flex items-center justify-end gap-4 mt-4">
-                    <button type="cancel"
-                        class="btn border border-slate-300 text-slate-500 dark:border-slate-700 dark:text-slate-300">
-                        Cancel
-                    </button>
-                    <button type="submit" class="btn btn-primary">Assign Permission</button>
-                </div>
+                    @endforeach --}}
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center gap-1.5">
+                                <input id="uid" class="checkbox" type="checkbox" name="basic-checkbox" data-check-all
+                                    data-check-all-target=".permission-checkbox">
+                                <label for="uid" class="label">Check All</label>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            @foreach ($permissions as $idx => $permission)
+                                <div class="flex items-center gap-1.5">
+                                    @foreach ($permission as $singlePermission)
+                                        <input class="checkbox permission-checkbox" type="checkbox"
+                                            id="uid-{{ $idx . '-' . $loop->iteration }}" name="permission[]"
+                                            value="{{ $singlePermission }}"
+                                            {{ $role->hasPermissionTo($singlePermission) ? 'checked' : '' }}>
+                                        <label for="uid-{{ $idx . '-' . $loop->iteration }}"
+                                            class="label">{{ $singlePermission }}</label>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end gap-4 mt-4">
+                        <button type="cancel"
+                            class="btn border border-slate-300 text-slate-500 dark:border-slate-700 dark:text-slate-300">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">Assign Permission</button>
+                    </div>
+                </form>
             </div>
         </section>
         <!-- Right Side Div End  -->

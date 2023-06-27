@@ -119,7 +119,7 @@ class MakeAdmin extends Command
      */
     public function assignRole(User $user): void
     {
-        $role = Role::findOrCreate('Super Admin');
+        $role = Role::findOrCreate('Developer');
         $user->assignRole($role);
     }
 }
